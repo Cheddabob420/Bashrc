@@ -6,9 +6,9 @@ echo "Installing core tools..."
 # Detect package manager and install basics
 if command -v apt &> /dev/null; then
     sudo apt update
-    sudo apt install -y neofetch git nano wget curl tree gh python3.12-venv gpg apt-transport-https cowsay
+    sudo apt install -y neofetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay
 elif command -v dnf &> /dev/null; then
-    sudo dnf install -y neofetch git nano wget curl tree gh python3.12-venv gpg apt-transport-https cowsay
+    sudo dnf install -y neofetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay
 fi
 
 # Add Flatpak Repos
