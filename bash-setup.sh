@@ -110,20 +110,32 @@ case "$distro_id" in
   *) DISTRO_ICON=" " ;;                
 esac
 
-### Username ###
-if [[ -n "$PREFIX" && "$PREFIX" == */com.termux/* ]]; then
-USER_NAME=cogy
+### Detection Function ###
+# Returns 0 (true) if running in Termux, 1 (false) otherwise
+is_termux() {
+    [[ -n "$PREFIX" && "$PREFIX" == */com.termux/* ]]
+}
+
+### Username & Path Logic ###
+if is_termux; then
+    USER_NAME="cogy"
+    # Termux specific paths
+    SHELL_RC="/data/data/com.termux/files/home/.shell_rc_content"
+    ALIASES="/data/data/com.termux/files/home/.aliases"
 else
-USER_NAME="$(whoami)"
+    USER_NAME="$(whoami)"
+    # Desktop/Standard Linux paths
+    SHELL_RC="$HOME/.shell_rc_content"
+    ALIASES="$HOME/.aliases"
 fi
 
 ### Build PS1 with proper escaping ###
-PS1='\[\e[1;32m\]╭─\[\e[1;34m\][\[\e[1;36m\]'"${USER_NAME}"'\[\e[1
-;33m\] '"${DISTRO_ICON}"' \[\e[1;36m\]\h\[\e[1;34m\]] [\[\e[1;33m\]\w\[\e[1;34m\]]\[\e[0m\]
+PS1='\[\e[1;32m\]╭─\[\e[1;34m\][\[\e[1;36m\]'"${USER_NAME}"'\[\e[1;33m\] '"${DISTRO_ICON}"' \[\e[1;36m\]\h\[\e[1;34m\]] [\[\e[1;33m\]\w\[\e[1;34m\]]\[\e[0m\]
 \[\e[1;32m\]╰─❯\[\e[0m\] '
 
-[[ -f /data/data/com.termux/files/home/.shell_rc_content ]] && source /data/data/com.termux/files/home/.shell_rc_content
-[[ -f /data/data/com.termux/files/home/.aliases ]] && source /data/data/com.termux/files/home/.aliases
+### Source Configs ###
+[[ -f "$SHELL_RC" ]] && source "$SHELL_RC"
+[[ -f "$ALIASES" ]] && source "$ALIASES"
 alias pyven='source ~/.venv/bin/activate'
 alias python='python3'
 
