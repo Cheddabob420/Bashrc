@@ -51,7 +51,14 @@ echo "Configuring $BASHRC..."
 # Create a backup with a timestamp
 cp "$BASHRC" "$BASHRC.bak.$(date +%F_%T)"
 
-# Overwrite with your custom environment
+# Create some needed directorys
+mkdir -v $HOME/Projects
+mkdir -v $HOME/Programs
+mkdir -v $HOME/Projects/Lua
+mkdir -v $HOME/Projects/Python
+mkdir -v $HOME/Projects/MicroWorks
+mkdir -v $HOME/Projects/HTML
+
 # Note: Use 'EOF' to prevent the script from expanding $HOME or $PS1 now
 cat << 'EOF' > "$BASHRC"
 # ~/.bashrc - Custom Environment
