@@ -1,4 +1,4 @@
-#!/bin/bash
+l#!/bin/bash
 
 # --- 1. Package Installation ---
 echo "Installing core tools..."
@@ -6,8 +6,11 @@ echo "Installing core tools..."
 # Install the basics
 
 sudo apt update && sudo apt dist-upgrade -y
-sudo apt install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh
+sudo apt install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh shellcheck
 
+# Add bash language server for kate
+sudo apt install npm -y
+sudo npm install -g bash-language-server
 
 # Add Flatpak Repos
 if ! flatpak remotes | grep -q "flathub"; then
