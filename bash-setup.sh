@@ -35,6 +35,8 @@ fc-cache -fv
 # 6. Cleanup: Remove the temporary directory and all its contents
 rm -rf "$TEMP_DIR"
 
+# Configure Github
+gh auth login
 
 # --- 2. Configuration Setup ---
 BASHRC="$HOME/.bashrc"
