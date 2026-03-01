@@ -11,6 +11,31 @@ elif command -v dnf &> /dev/null; then
     sudo dnf install -y neofetch git nano wget curl tree gh python3.12-venv
 fi
 
+# Installing nerd font
+# 1. Define variables
+FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/ProFont.zip"
+FONT_DIR="$HOME/.local/share/fonts/ProFont"
+TEMP_DIR=$(mktemp -d)
+
+echo "Downloading and installing ProFont Nerd Font..."
+
+# 2. Create the font directory if it doesn't exist
+mkdir -p "$FONT_DIR"
+
+# 3. Download the zip to the temporary directory
+wget -O "$TEMP_DIR/ProFont.zip" "$FONT_URL"
+
+# 4. Unzip only the font files (.ttf and .otf) into the font folder
+unzip "$TEMP_DIR/ProFont.zip" -d "$TEMP_DIR"
+mv "$TEMP_DIR"/*.{ttf,otf} "$FONT_DIR/" 2>/dev/null
+
+# 5. Update the system font cache
+fc-cache -fv
+
+# 6. Cleanup: Remove the temporary directory and all its contents
+rm -rf "$TEMP_DIR"
+
+
 # --- 2. Configuration Setup ---
 BASHRC="$HOME/.bashrc"
 echo "Configuring $BASHRC..."
@@ -71,7 +96,8 @@ case "$distro_id" in
   opensuse*|sles) DISTRO_ICON="<U+F314>" ;; # openSUSE
   gentoo) DISTRO_ICON="<U+F30D>" ;; # Gentoo
   nixos) DISTRO_ICON="<U+F313>" ;; # NixOS
-  *) DISTRO_ICON="<U+F0032>" ;;      # Default Linux Icon
+  linuxmint) DISTRO_ICON="<U+F17C>" ;;  # Mint
+  *) DISTRO_ICON=" " ;;                
 esac
 
 ### Username ###
@@ -131,7 +157,7 @@ echo "Running a system update..."
 source $HOME/.bashrc
 updater
 wait
-echo "Finished!"
+echo "Installation complete! Please restart your terminal and select 'ProFont Nerd Font' in settings."
 
 
 
