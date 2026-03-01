@@ -74,11 +74,7 @@ alias gst='git status'
 alias gp='git pull'
 
 # Update command alias
-if command -v apt &> /dev/null; then
-    alias updater='sudo apt update && sudo apt dist-upgrade -y && flatpak update'
-elif command -v dnf &> /dev/null; then
-    alias updater='sudo dnf update && sudo dnf upgrade'
-fi
+alias updater='sudo apt update && sudo apt dist-upgrade -y && flatpak update'
 alias autoremove='sudo apt autoremove -y'
 
 # Python aliases
@@ -88,8 +84,7 @@ alias pyven='source $HOME/.venv/bin/activate'
 
 ### Detect Linux Distro ###
 if command -v grep &> /dev/null && [ -f /etc/os-release ]; then
-    distro_id=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d
-'"')
+    distro_id=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d'"')
 else
     distro_id="unknown"
 fi
