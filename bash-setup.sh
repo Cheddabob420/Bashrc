@@ -226,12 +226,7 @@ echo "--- Migration Complete! Google Chrome is now your default. ---"
 google-chrome --version
 
 echo "Bashrc Setup Complete!"
-# Running system update
-echo "Running a system update..."
-source $HOME/.bashrc
-updater
-wait
-echo "Installation complete! Please restart your terminal and select 'ProFont Nerd Font' in settings."
+
 
 
 
