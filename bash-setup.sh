@@ -11,6 +11,14 @@ elif command -v dnf &> /dev/null; then
     sudo dnf install -y neofetch git nano wget curl tree gh python3.12-venv gpg apt-transport-https cowsay
 fi
 
+# Add Flatpak Repos
+if ! flatpak remotes | grep -q "flathub"; then
+    echo "Adding Flathub repository..."
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+else
+    echo "Flathub already configured. Skipping."
+fi
+
 # Installing nerd font
 # 1. Define variables
 FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/ProFont.zip"
