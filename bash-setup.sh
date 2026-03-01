@@ -6,9 +6,9 @@ echo "Installing core tools..."
 # Detect package manager and install basics
 if command -v apt &> /dev/null; then
     sudo apt update
-    sudo apt install -y neofetch git nano wget curl tree gh python3.12-venv
+    sudo apt install -y neofetch git nano wget curl tree gh python3.12-venv gpg apt-transport-https
 elif command -v dnf &> /dev/null; then
-    sudo dnf install -y neofetch git nano wget curl tree gh python3.12-venv
+    sudo dnf install -y neofetch git nano wget curl tree gh python3.12-venv gpg apt-transport-https
 fi
 
 # Installing nerd font
@@ -150,6 +150,18 @@ else
     echo "Creating python environment at ~/.venv"
     python3 -m venv .venv
 fi
+# Install VS Code
+
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+
+rm -f packages.microsoft.gpg
+sudo apt update
+sudo apt install -y code
+
+echo "VS Code installation complete! Run it by typing 'code' in your terminal."
 
 wait
 
