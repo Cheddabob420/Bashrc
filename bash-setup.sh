@@ -6,9 +6,9 @@ echo "Installing core tools..."
 # Detect package manager and install basics
 if command -v apt &> /dev/null; then
     sudo apt update && sudo apt dist-upgrade -y
-    sudo apt install -y neofetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay
+    sudo apt install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh
 elif command -v dnf &> /dev/null; then
-    sudo dnf install -y neofetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay
+    sudo dnf install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh
 fi
 
 # Add Flatpak Repos
@@ -139,8 +139,8 @@ PS1='\[\e[1;32m\]╭─\[\e[1;34m\][\[\e[1;36m\]'"${USER_NAME}"'\[\e[1;33m\] '"$
 alias pyven='source ~/.venv/bin/activate'
 alias python='python3'
 
-# Add neofetch to the bottom for the sys info art
-neofetch
+# Add fastfetch to the bottom for the sys info art
+fastfetch
 EOF
 
 # --- 3. Finalization ---
