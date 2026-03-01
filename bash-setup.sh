@@ -3,13 +3,11 @@
 # --- 1. Package Installation ---
 echo "Installing core tools..."
 
-# Detect package manager and install basics
-if command -v apt &> /dev/null; then
-    sudo apt update && sudo apt dist-upgrade -y
-    sudo apt install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh
-elif command -v dnf &> /dev/null; then
-    sudo dnf install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh
-fi
+# Install the basics
+
+sudo apt update && sudo apt dist-upgrade -y
+sudo apt install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh
+
 
 # Add Flatpak Repos
 if ! flatpak remotes | grep -q "flathub"; then
@@ -42,9 +40,6 @@ fc-cache -fv
 
 # 6. Cleanup: Remove the temporary directory and all its contents
 rm -rf "$TEMP_DIR"
-
-# Configure Github
-gh auth login
 
 # --- 2. Configuration Setup ---
 BASHRC="$HOME/.bashrc"
@@ -219,6 +214,13 @@ rm -rf "$TEMP_DIR"
 
 echo "--- Migration Complete! Google Chrome is now your default. ---"
 google-chrome --version
+
+# Setup chrome before gh auth
+echo "Please open chrome and sign in before going any further to make github auth much easyier."
+read -n 1 -s -p "Press any key to continue..."
+echo ""
+# Configure Github
+gh auth login
 
 echo "Bashrc Setup Complete!"
 
