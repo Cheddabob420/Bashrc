@@ -126,6 +126,12 @@ fi
 wait
 
 echo "Bashrc Setup Complete!"
+# Running system update
+echo "Running a system update..."
+source $HOME/.bashrc
+updater
+wait
+echo "Finished!"
 
 
 
