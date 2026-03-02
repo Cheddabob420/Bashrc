@@ -150,24 +150,44 @@ echo "Success! Your environment is ready."
 cd "$HOME" || exit
 python_env="$HOME/.venv"
 
+create_venv() {
+    echo "Creating python environment at $python_env..."
+    
+    # Try creating the venv
+    if ! python3 -m venv "$python_env" 2>/dev/null; then
+        echo "venv module missing. Attempting to install the required system package..."
+        
+        # 1. Get the version (e.g., "3.11")
+        PY_VER=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+        VENV_PKG="python${PY_VER}-venv"
+        
+        # 2. Attempt to install the specific package
+        echo "Running: sudo apt update && sudo apt install -y $VENV_PKG"
+        if sudo apt update && sudo apt install -y "$VENV_PKG"; then
+            # 3. Retry the venv creation
+            python3 -m venv "$python_env"
+        else
+            echo "Error: Failed to install $VENV_PKG. Please install it manually."
+            exit 1
+        fi
+    fi
+}
+
 if [[ -d "$python_env" ]]; then
-    echo "Python environment exisit at $python_env"
+    echo "Python environment exists at $python_env"
     read -rp "Would you like to reinstall it? (y/n): " yn
     case $yn in
         [Yy]* ) 
             echo "Proceeding with the installation..."
-            rm -Rf .venv
-            python3 -m venv .venv
-            exit
+            rm -Rf "$python_env"
+            create_venv
             ;;
         [Nn]* ) 
             echo "Operation canceled by user."
-            exit
             ;;
     esac
 else
-    echo "Creating python environment at ~/.venv"
-    python3 -m venv .venv
+    create_venv
 fi
 # Install VS Code
 
