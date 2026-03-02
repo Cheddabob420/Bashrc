@@ -6,7 +6,7 @@ echo "Installing core tools..."
 # Install the basics
 
 sudo apt update && sudo apt dist-upgrade -y
-sudo apt install -y fastfetch git nano wget curl tree gh python3.13-venv gpg apt-transport-https cowsay ssh shellcheck
+sudo apt install -y fastfetch git nano wget curl tree gh gpg apt-transport-https cowsay ssh shellcheck
 
 # Add bash language server for kate
 sudo apt install npm -y
