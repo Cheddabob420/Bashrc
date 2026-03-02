@@ -1,4 +1,4 @@
-l#!/bin/bash
+#!/bin/bash
 
 # --- 1. Package Installation ---
 echo "Installing core tools..."
