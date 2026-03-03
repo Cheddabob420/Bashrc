@@ -83,8 +83,9 @@ alias updater='sudo apt update && sudo apt dist-upgrade -y && flatpak update'
 alias autoremove='sudo apt autoremove -y'
 
 # Python aliases
-alias python='python3'
-alias pyhon='python'
+alias pip='$HOME/.venv/bin/pip'
+alias python='$HOME/.venv/bin/python3'
+alias python3='$HOME/.venv/bin/python3'
 alias pyven='source $HOME/.venv/bin/activate'
 
 ### Detect Linux Distro ###
@@ -246,7 +247,7 @@ echo "--- Migration Complete! Google Chrome is now your default. ---"
 google-chrome --version
 
 # Setup chrome before gh auth
-echo "Please open chrome and sign in before going any further to make github auth much easyier."
+echo "Please open chrome and sign in before going any further to make github auth much easier."
 read -n 1 -s -p "Press any key to continue..."
 echo ""
 # Configure Github
