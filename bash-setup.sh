@@ -10,7 +10,7 @@ sudo apt install -y fastfetch git nano wget curl tree gh gpg apt-transport-https
 
 # Add bash language server for kate
 sudo apt install npm -y
-sudo npm install -g bash-language-server lua-language-server python-language-server
+sudo npm install -g bash-language-server 
 
 # Add Flatpak Repos
 if ! flatpak remotes | grep -q "flathub"; then
